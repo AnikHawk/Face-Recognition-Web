@@ -1,24 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Navigation from './components/Navigation/Navigation';
+import Logo from './Logo/Logo';
+import ImageLinkForm from './ImageLinkForm/ImageLinkForm';
+import Rank from './Rank/Rank';
+import Particles from 'react-particles-js';
+
+const particleParam = {
+  particles: {
+    number: {
+      value: 150,
+      density: {
+        enable: true,
+        value_area: 1000,
+      },
+    },
+  },
+};
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Particles className="Particles" params={particleParam} />
+      <Navigation />
+      <Logo />
+      <Rank />
+      <ImageLinkForm />
     </div>
   );
 }
