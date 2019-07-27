@@ -34,6 +34,7 @@ class App extends Component {
       input: '',
       imageUrl: '',
       box: {},
+      celebName: '',
       route: 'home',
       isSignedIn: false,
       user: {
@@ -61,6 +62,10 @@ class App extends Component {
   calculateFaceLocation = data => {
     const clarifaiFace =
       data.outputs[0].data.regions[0].region_info.bounding_box;
+    this.setState({
+      celebName: data.outputs[0].data.regions[0].data.concepts[0].name,
+    });
+
     const image = document.getElementById('inputimage');
     const width = Number(image.width);
     const height = Number(image.height);
@@ -83,7 +88,7 @@ class App extends Component {
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input});
     app.models
-      .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+      .predict('e466caa0619f444ab97497640cefc4dc', this.state.input)
       .then(response => {
         if (response) {
           fetch('http://localhost:3000/image', {
@@ -113,7 +118,7 @@ class App extends Component {
   };
 
   render() {
-    const {isSignedIn, imageUrl, route, box} = this.state;
+    const {isSignedIn, imageUrl, route, box, celebName} = this.state;
     return (
       <div className="App">
         <Particles className="particles" params={particlesOptions} />
@@ -132,7 +137,11 @@ class App extends Component {
               onInputChange={this.onInputChange}
               onButtonSubmit={this.onButtonSubmit}
             />
-            <FaceRecognition box={box} imageUrl={imageUrl} />
+            <FaceRecognition
+              box={box}
+              imageUrl={imageUrl}
+              celebName={celebName}
+            />
           </div>
         ) : route === 'signin' ? (
           <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
