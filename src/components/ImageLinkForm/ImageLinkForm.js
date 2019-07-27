@@ -1,34 +1,31 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './ImageLinkForm.css';
 
-class ImageLinkForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
-    return (
-      <div>
-        <p className="f3 light-gray">
-          This is a basic Face Recognition App. Paste an image URL to detect
-          faces.
-        </p>
-        <div className="pa3 br3 shadow-5 center Form">
+const ImageLinkForm = ({onInputChange, onButtonSubmit}) => {
+  return (
+    <div>
+      <p className="f3 white">
+        {
+          'This is a simple face recognition app. Paste an image URL to detect a single face.'
+        }
+      </p>
+      <div className="center">
+        <div className="form center pa4 br3 shadow-5">
           <input
-            type="text"
-            className="center f4 pa2 ma2 w-70"
-            onChange={this.props.onInputChange}
+            className="f4 pa2 w-70 center"
+            type="tex"
+            onChange={onInputChange}
           />
           <button
-            className=" grow w-25 f4 pa2 bg-dark-green hover-bg-dark-blue white dib Button"
-            onClick={this.props.onSubmit}
+            className="w-30 grow f4 link ph3 pv2 dib white bg-light-purple"
+            onClick={onButtonSubmit}
           >
             Detect
           </button>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default ImageLinkForm;
